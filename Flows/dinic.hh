@@ -1,6 +1,7 @@
 // TODO: create a structure
 
 const int MAXN = 200;
+const int INF = 1e9;
 
 struct Edge{
     int to, c, f = 0;
@@ -62,7 +63,7 @@ int dfs(int v, int flow){
 int dinic() {
     int res = 0;
     while(bfs()){
-        memset(ptr, 0, (n + 2) * sizeof(ptr[0]));
+        memset(ptr, 0, n * sizeof(ptr[0]));
         while (int pushed = dfs(S, INF)){ res += pushed; }
     }
     return res;
