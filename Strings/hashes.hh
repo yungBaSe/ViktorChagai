@@ -1,8 +1,8 @@
 namespace Hashes {
 struct HashedString {
     HashedString(string &_s) : s(_s) {
-        init(s);
-        calcHashes(s);
+        init();
+        calcHashes();
     }
 
     pair <ll, ll> getHash(int l, int r) {
