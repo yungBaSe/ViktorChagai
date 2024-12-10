@@ -1,61 +1,39 @@
-namespace ConvexHull {
-/*
-Let's say we have a relation:
-dp[i] = min(dp[j] + h[j+1]*w[i]) for j<=i
-Let's set k_j = h[j+1], x = w[i], b_j = dp[j]. We get:
-dp[i] = min(b_j+k_j*x) for j<=i.
-This is the same as finding a minimum point on a set of lines.
-After calculating the value, we add a new line with
-k_i = h[i+1] and b_i = dp[i].
-*/
+namespace Linecontainer{
 struct Line {
-    int k;
-    int b;
-
-    int eval(int x) {
-        return k*x+b;
-    }
-
-    int intX(Line& other) {
-        int x = b-other.b;
-        int y = other.k-k;
-        int res = x/y;
-        if(x%y != 0) res++;
-        return res;
-    }
+    mutable ll k, m, p; // p is the position from which the line is optimal
+    ll val (ll x) const { return k * x + m; }
+    bool operator< (const Line& o) const { return p < o.p; }
 };
 
-struct BagOfLines {
-    vector<pair<Line, int>> lines;
-
-    void addLine(int k, int b) {
-        Line current = {k, b};
-        if(lines.empty()) {
-            lines.pb({current, -OO});
-            return;
-        }
-        int x = -OO;
-        while(true) {
-            auto line = lines.back().first;
-            int from = lines.back().second;
-            x = line.intX(current);
-            if(x > from) break;
-            lines.pop_back();
-        }
-        lines.pb({current, x});
+ll floordiv (ll a, ll b) {
+    return a / b - ((a^b) < 0 && a % b);
+}
+// queries and line intersections should be in range (-INF, INF)
+const ll INF = 1e17;
+struct LineContainer : vector<Line> {
+    ll isect(const Line& a, const Line& b) {
+        if (a.k == b.k) return a.m > b.m ? (-INF) : INF;
+        ll res = floordiv(b.m - a.m, a.k - b.k);
+        if (a.val(res) < b.val(res)) res++;
+        return res;
     }
 
-    int findMin(int x) {
-        int lo = 0, hi = (int)lines.size()-1;
-        while(lo < hi) {
-            int mid = (lo+hi+1)/2;
-            if(lines[mid].second <= x) {
-                lo = mid;
-            } else {
-                hi = mid-1;
-            }
-        }
-        return lines[lo].first.eval(x);
+    void add(ll k, ll m) {
+        Line a = {k,m,INF};
+        while (!empty() && isect(a, back()) <= back().p) pop_back();
+        a.p = empty() ? (-INF) : isect(a, back());
+        push_back(a);
+    }
+    ll query(ll x) {
+        assert(!empty());
+        return (--upper_bound(begin(), end(), Line({0, 0, x})))->val(x);
+    }
+    int qi = 0;
+    ll sorted_query(ll x) {
+        assert(!empty());
+        qi = min(qi, (int)size() - 1);
+        while(qi < size() - 1 && (*this)[qi + 1].p <= x) qi++;
+        return (*this)[qi].val(x);
     }
 };
 };
