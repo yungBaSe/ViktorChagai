@@ -2,7 +2,6 @@
 
 const int MAXN = 200;
 const int INF = 1e9;
-
 struct Edge{
     int to, c, f = 0;
     Edge (int _to, int _c) {
@@ -10,20 +9,17 @@ struct Edge{
         c = _c;
     }
 };
- 
 vector <Edge> edges;
 vector <int> g[MAXN], ans_g[MAXN];
 bool used[MAXN];
 int d[MAXN], ptr[MAXN];
 int n, S, T, even, odd;
- 
 void add_edge(int u, int v, int c){
     g[u].push_back(edges.size());
     edges.emplace_back(v, c);
     g[v].push_back(edges.size());
     edges.emplace_back(u, 0);
 }
- 
 bool bfs(){
     memset(d, -1, n * sizeof(d[0]));
     queue <int> q;
@@ -42,7 +38,6 @@ bool bfs(){
     }
     return d[T] != -1;
 }
- 
 int dfs(int v, int flow){
     if (!flow) return 0;
     if (v == T) return flow;
@@ -59,7 +54,6 @@ int dfs(int v, int flow){
     }
     return 0;
 }
-
 int dinic() {
     int res = 0;
     while(bfs()){

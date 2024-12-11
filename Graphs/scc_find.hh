@@ -3,7 +3,6 @@
 vector <vector <int>> g, gr;
 vector <char> used;
 vector <int> order, component;
- 
 void dfs1 (int v) {
 	used[v] = true;
 	for (int u : g[v])
@@ -11,7 +10,6 @@ void dfs1 (int v) {
 			dfs1(u);
 	order.push_back(v);
 }
-
 void dfs2 (int v) {
 	used[v] = true;
 	component.push_back(v);
@@ -19,7 +17,6 @@ void dfs2 (int v) {
 		if (!used[u])
 			dfs2(u);
 }
- 
 vector <vector <int>> SCC_find() {
     int n, m;
 	cin >> n >> m;

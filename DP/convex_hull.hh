@@ -4,7 +4,6 @@ struct Line {
     ll val (ll x) const { return k * x + m; }
     bool operator< (const Line& o) const { return p < o.p; }
 };
-
 ll floordiv (ll a, ll b) {
     return a / b - ((a^b) < 0 && a % b);
 }
@@ -17,7 +16,6 @@ struct LineContainer : vector<Line> {
         if (a.val(res) < b.val(res)) res++;
         return res;
     }
-
     void add(ll k, ll m) {
         Line a = {k,m,INF};
         while (!empty() && isect(a, back()) <= back().p) pop_back();

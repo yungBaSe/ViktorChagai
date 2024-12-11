@@ -4,20 +4,17 @@ struct HashedString {
         init(s);
         calcHashes(s);
     }
-
     pair <ll, ll> getHash(int l, int r) {
         ll h1 = (prefixHash[r + 1].first - (prefixHash[l].first * A1pwrs[r + 1 - l]) % B1 + B1) % B1;
         ll h2 = (prefixHash[r + 1].second - (prefixHash[l].second * A2pwrs[r + 1 - l]) % B2 + B2) % B2;
 
         return {h1, h2};
     }
-
 private:
     string &s;
     const ll A1 = 999999929, B1 = 1000000009, A2 = 1000000087, B2 = 1000000097;
     vector <ll> A1pwrs, A2pwrs;
     vector <pair <ll, ll>> prefixHash;
-
     void init() {
         ll a1 = 1;
         ll a2 = 1;
@@ -28,7 +25,6 @@ private:
             a2 = (a2 * A2) % B2;
         }
     }
-
     void calcHashes() {
         pair <ll, ll> h = {0, 0};
         prefixHash.push_back(h);

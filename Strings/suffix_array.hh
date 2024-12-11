@@ -43,7 +43,6 @@ vector <int> sortCyclicShifts(string const& s) {
     }
     return p;
 }
-
 vector <int> constructSuffixArray(string &s) {
     s += "$"; // <- this must be smaller than any character in s
     vector<int> sorted_shifts = sortCyclicShifts(s);
@@ -51,5 +50,4 @@ vector <int> constructSuffixArray(string &s) {
     s.pop_back();
     return sorted_shifts;
 }
-
 }

@@ -4,7 +4,6 @@ vector <int> g[MAXN];
 bool used[MAXN];
 int h[MAXN], d[MAXN];
 set <int> ans;
- 
 void dfs_cutpoints(int v, int p = -1) {
     used[v] = 1;
     d[v] = h[v];
@@ -28,7 +27,6 @@ void dfs_cutpoints(int v, int p = -1) {
         ans.insert(v);
     }
 }
-
 void dfs_bridges(int v, int p) {
     used[v] = 1;
     d[v] = h[v];

@@ -14,16 +14,16 @@ struct Treap{
     pair<Node*, Node*> split(Node* n, int k) {
         if (!n) return {};
         if (cnt(n->l) >= k) { // ”n−>va l >= k” for lower bound(k)
-        auto pa = split(n->l, k);
-        n->l = pa.second;
-        n->recalc();
-        return {pa.first, n};
-    } else {
-        auto pa = split(n->r, k - cnt(n->l) - 1); // and jus t ”k”
-        n->r = pa.first;
-        n->recalc();
-        return {n, pa.second};
-    }
+            auto pa = split(n->l, k);
+            n->l = pa.second;
+            n->recalc();
+            return {pa.first, n};
+        } else {
+            auto pa = split(n->r, k - cnt(n->l) - 1); // and jus t ”k”
+            n->r = pa.first;
+            n->recalc();
+            return {n, pa.second};
+        }
     }
     Node* merge(Node* l, Node* r) {
         if (!l) return r;

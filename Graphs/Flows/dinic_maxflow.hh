@@ -1,19 +1,15 @@
 // TODO: create a structure
 
 const int MAXN = 200;
-const int INF = 1e9
-
+const int INF = 1e9;
 int n;
 int cost[MAXN][MAXN], cap[MAXN][MAXN];
 int d[MAXN], pot[MAXN], par[MAXN];
 bool edge[MAXN][MAXN];
- 
 bool dijkstra (int s, int t) {
     vector <bool> used(n, 0);
- 
     fill(d, d + n, INF);
     d[s] = 0;
- 
     while (1) {
         int v = -1;
         for (int u = 0; u < n; u++)
@@ -30,10 +26,8 @@ bool dijkstra (int s, int t) {
             }
         }
     }
- 
     return d[t] != INF;
 }
- 
 int mincost_maxflow (int s, int t) {
     int ans = 0;
     while (dijkstra(s, t)) {
