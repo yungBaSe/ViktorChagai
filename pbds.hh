@@ -1,5 +1,6 @@
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
+#include <bits/extc++.h>
 using namespace __gnu_pbds;
 typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
 // ordered_set X;
@@ -14,4 +15,4 @@ struct chash { // large odd number for C
 	const uint64_t C = ll(4e18 * acos(0)) | 71;
 	ll operator()(ll x) const { return __builtin_bswap64(x*C); }
 };
-__gnu_pbds::gp_hash_table<ll,int,chash> h({},{},{},{},{1<<16});
+gp_hash_table<ll,int,chash> h({},{},{},{},{1<<16});
