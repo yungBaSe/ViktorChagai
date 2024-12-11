@@ -1,5 +1,4 @@
 /**
- * Author: Semyon Babich
  * Description: Geek from Tyumen Region thinks that he is RMQ Data Structre 
  */
 template <typename T>

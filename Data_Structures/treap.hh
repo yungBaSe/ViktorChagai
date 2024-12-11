@@ -1,5 +1,4 @@
 /**
- * Author: someone on Codeforces
  * Description: Just treap=)
  */
 #pragma once

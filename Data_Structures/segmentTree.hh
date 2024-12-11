@@ -1,5 +1,4 @@
 /**
- * Author: Semyon Babich
  * Description: Na otrezke mozhno gryaz delat
  */
 template <typename T>

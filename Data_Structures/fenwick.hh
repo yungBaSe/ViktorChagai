@@ -1,5 +1,4 @@
 /**
- * Author: Semyon Babich
  * Description: Fenwick my twizz=)
  */
 struct FT {
