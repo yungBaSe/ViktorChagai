@@ -1,5 +1,4 @@
 namespace LiChaoTree{
-
 struct LiChaoTree{
     struct line {
         int k = 0, m = 0;
@@ -9,13 +8,10 @@ struct LiChaoTree{
             return k * x + m;
         }
     };
-
 public:
-
     LiChaoTree (int _maxn) : maxn(_maxn) {
         t.assign(4 * maxn);
     }
-
     void upd(int v = 1, int tl = 0, int tr = maxn - 1, line L) {
         if (tl > tr) {
             return;
@@ -33,7 +29,6 @@ public:
             upd(2 * v + 1, tm + 1, tr, L);
         }
     }
-
     int get(int v = 1, int tl = 0, int tr = maxn - 1, int x) {
         if (tl > tr) {
             return 0;
