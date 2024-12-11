@@ -2,7 +2,6 @@
 # encoding: utf-8
 
 # Source code preprocessor for ViktorChagai build process.
-# License: CC0
 
 import sys
 import getopt
@@ -261,7 +260,7 @@ def main():
             print_header(print_header_value, outstream)
             return
         print(" * \x1b[1m{}\x1b[0m".format(caption))
-        if language in ["cpp", "cc", "c", "h", "hpp"]:
+        if language in ["cpp", "cc", "c", "h", "hpp", "hh"]:
             processwithcomments(caption, instream, outstream, 'C++')
         elif language in ["java", "kt"]:
             processwithcomments(caption, instream, outstream, 'Java')
