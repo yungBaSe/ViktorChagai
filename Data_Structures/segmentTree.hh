@@ -1,7 +1,10 @@
-namespace SegmentTree{
-
+/**
+ * Author: Semyon Babich
+ * Description: Na otrezke mozhno gryaz delat
+ */
 template <typename T>
 struct SegmentTree{
+public:
     SegmentTree(vector <T>& _a) : n(_a.size()), a(_a) : {
         t.assign(4 * n, 0);
         mod.assign(4 * n, 0);
@@ -56,5 +59,4 @@ private:
         apply(2*v + 1, mid, r, mod[v]);
         mod[v] = 0;
     }
-};
 };

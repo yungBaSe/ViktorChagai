@@ -1,3 +1,7 @@
+/**
+ * Author: Semyon Babich
+ * Description: Fenwick my twizz=)
+ */
 struct FT {
 	vector<ll> s;
 	FT(int n) : s(n) {}

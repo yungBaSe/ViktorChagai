@@ -10,3 +10,8 @@ typedef trie<string, null_type, trie_string_access_traits<>, pat_trie_tag, trie_
 // pref_trie base;
 // base.insert("hello") - добавить строчку в бор
 // auto range = base.prefix_range(x.substr(1)); - пара итераторов, образующих полуинтервал строк с заданным префиксом
+struct chash { // large odd number for C
+	const uint64_t C = ll(4e18 * acos(0)) | 71;
+	ll operator()(ll x) const { return __builtin_bswap64(x*C); }
+};
+__gnu_pbds::gp_hash_table<ll,int,chash> h({},{},{},{},{1<<16});
