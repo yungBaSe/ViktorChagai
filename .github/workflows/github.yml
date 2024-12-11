@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: VIKTOR CHAGAI BUILDS SO YOU BETTER RUN!!!!!!!!!!!!!
 
 on:
   push:
@@ -17,4 +17,4 @@ jobs:
     - name: Install pdflatex
       run: sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra
     - name: Build pdf
-      run: make kactl
+      run: make ViktorChagai
