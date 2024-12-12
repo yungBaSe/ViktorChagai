@@ -3,6 +3,21 @@
 
 \chapter{Mathematics}
 
+\section{Master Theorem}
+\begin{equation*}
+    T(n) = 
+        \begin{cases}
+            aT(\frac{n}{b}) + \Theta(n^c) & n > n_0\\
+            \Theta(1) & n \leq n_0
+        \end{cases}
+\end{equation*}
+
+\begin{itemize}
+  \item $c > \log_ba : T(n) = \Theta(n^c)$
+  \item $c = \log_ba : T(n) = \Theta(n^c\log n)$
+  \item $c < \log_ba : T(n) = \Theta(n^{\log_ba})$
+\end{itemize}
+
 \section{Equations}
 \[ax^2+bx+c=0 \Rightarrow x = \frac{-b\pm\sqrt{b^2-4ac}}{2a}\]
 

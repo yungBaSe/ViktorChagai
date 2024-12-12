@@ -1,4 +1,7 @@
-namespace LiChaoTree{
+/**
+ * Description: good with lazySegmentTree.hh idea sometimes.
+ * It's just got to be here. Don't touch it.
+ */
 struct LiChaoTree{
     struct line {
         int k = 0, m = 0;
@@ -48,4 +51,3 @@ private:
     int maxn;
     vector <line> t;
 }
-};

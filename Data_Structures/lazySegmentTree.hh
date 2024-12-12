@@ -1,6 +1,6 @@
 /**
  * Description: Segment tree with ability to add or set values of large intervals, and compute max of intervals.
- * Time: O(\log N).
+ * Time: $O(\log N)$.
  * Usage: Node* tr = new Node(v, 0, sz(v));
  */
 const int inf = 1e9;
