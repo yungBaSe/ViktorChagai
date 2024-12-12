@@ -1,4 +1,14 @@
-namespace Linecontainer{
+/**
+ * Description: Use this if your $dp$ transformable to: 
+ * $dp[i][m] = min(a[k] * x + b[k])$
+ * 
+ * E.g. $f[i][j] = min(f[k][j - 1] + (x_{i - 1} - x_k)^2)$
+ * 
+ * $f[i][j] = min(f[k][j - 1] + x_k^2 - 2x_kx_{i-1}) + x_{i-1}^2$
+ * 
+ * $a[k] = f[k][j - 1] + x_k^2, b[k] = -2x_k$
+ * Time: $O(nk)$
+ */
 struct Line {
     mutable ll k, m, p; // p is the position from which the line is optimal
     ll val (ll x) const { return k * x + m; }
@@ -33,5 +43,4 @@ struct LineContainer : vector<Line> {
         while(qi < size() - 1 && (*this)[qi + 1].p <= x) qi++;
         return (*this)[qi].val(x);
     }
-};
 };
