@@ -1,3 +1,8 @@
+/**
+ * Description: fft(a) computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$ for all $k$. N must be a power of 2.
+   Otherwise, use NTT/FFTMod.
+ * Time: O(N \log N) with $N = |A|+|B|$ ($\tilde 1s$ for $N=2^{22}$)
+ */
 template<class db>
 struct Complex {
     db real, image;
