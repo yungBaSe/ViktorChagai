@@ -12,17 +12,20 @@ help:
 	@echo ""
 	@echo "For more information see the file 'doc/README'"
 
-ViktorChagai: | build
-	@# Автоматическая конвертация перед сборкой
-	@if [ -f "tex/GeekViktorChagai.pdf" ]; then \
-		command -v gs >/dev/null 2>&1 && { \
-			gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dQUIET -dBATCH \
-			   -sOutputFile=tex/GeekViktorChagai_temp.pdf tex/GeekViktorChagai.pdf 2>/dev/null && \
-			mv tex/GeekViktorChagai_temp.pdf tex/GeekViktorChagai.pdf; \
-		} || true; \
-	fi
+ViktorChagai: convert-pdf | build
 	$(LATEXCMD) ViktorChagai.tex && $(LATEXCMD) ViktorChagai.tex
 	cp build/ViktorChagai.pdf ViktorChagai.pdf
+
+convert-pdf:
+	@if [ -f "tex/GeekViktorChagai.pdf" ]; then \
+		echo "Converting PDF to version 1.5..."; \
+		gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dQUIET -dBATCH \
+		   -sOutputFile=tex/GeekViktorChagai_temp.pdf tex/GeekViktorChagai.pdf; \
+		mv tex/GeekViktorChagai_temp.pdf tex/GeekViktorChagai.pdf; \
+		echo "PDF converted successfully"; \
+	else \
+		echo "tex/GeekViktorChagai.pdf not found, skipping conversion"; \
+	fi
 
 clean:
 	cd build && rm -f ViktorChagai.aux ViktorChagai.log \
