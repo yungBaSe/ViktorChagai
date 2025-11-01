@@ -3,10 +3,11 @@ name: VIKTOR CHAGAI BUILDS SO YOU BETTER RUN!!!!!!!!!!!!!
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - 'ViktorChagai.pdf'
   pull_request:
     branches: [ main ]
   workflow_dispatch:
-    branches: [ main ]
 
 jobs:
   build:
@@ -15,8 +16,15 @@ jobs:
     timeout-minutes: 20
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Install pdflatex
       run: sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra
     - name: Build pdf
       run: make ViktorChagai
+    - name: Commit and push if changed
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add ViktorChagai.pdf
+        git diff --staged --quiet || git commit -m "Auto-build ViktorChagai.pdf"
+        git push
