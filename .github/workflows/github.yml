@@ -3,12 +3,8 @@ name: VIKTOR CHAGAI BUILDS SO YOU BETTER RUN!!!!!!!!!!!!!
 on:
   push:
     branches: [ main ]
-    paths-ignore:
-      - 'ViktorChagai.pdf'
   pull_request:
     branches: [ main ]
-    paths-ignore:
-      - 'ViktorChagai.pdf'
   workflow_dispatch:
 
 permissions:
@@ -16,22 +12,38 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        
     - name: Install pdflatex
-      run: sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra
+      run: sudo apt-get update && sudo apt-get install -y texlive-latex-base texlive-latex-recommended texlive-latex-extra make
+      
     - name: Build pdf
       run: make ViktorChagai
-    - name: Commit and push if changed
+      
+    - name: Upload PDF as artifact (for PR)
+      if: github.event_name == 'pull_request'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ViktorChagai-pdf
+        path: ViktorChagai.pdf
+        retention-days: 1
+
+    - name: Commit PDF to repo (only on merge to main)
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add ViktorChagai.pdf
-        git diff --staged --quiet || git commit -m "Auto-build ViktorChagai.pdf"
-        git push
+        if ! git diff --staged --quiet; then
+          git commit -m "Auto-build ViktorChagai.pdf [skip ci]"
+          git push
+        else
+          echo "No changes to commit"
+        fi
