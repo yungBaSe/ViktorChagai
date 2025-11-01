@@ -13,6 +13,14 @@ help:
 	@echo "For more information see the file 'doc/README'"
 
 ViktorChagai: | build
+	@# Автоматическая конвертация перед сборкой
+	@if [ -f "tex/GeekViktorChagai.pdf" ]; then \
+		command -v gs >/dev/null 2>&1 && { \
+			gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dQUIET -dBATCH \
+			   -sOutputFile=tex/GeekViktorChagai_temp.pdf tex/GeekViktorChagai.pdf 2>/dev/null && \
+			mv tex/GeekViktorChagai_temp.pdf tex/GeekViktorChagai.pdf; \
+		} || true; \
+	fi
 	$(LATEXCMD) ViktorChagai.tex && $(LATEXCMD) ViktorChagai.tex
 	cp build/ViktorChagai.pdf ViktorChagai.pdf
 
